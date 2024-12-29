@@ -26,7 +26,7 @@ def call_model(state: State) -> State:
         messages = state["messages"]
 
     response = llm.invoke(messages)
-    return {"messages": response}
+    return {"messages": response} #type: ignore
 
 
 def summarize_conversation(state: State):
@@ -51,7 +51,7 @@ def summarize_conversation(state: State):
     response = llm.invoke(messages)
 
     # Delete all but the 2 most recent messages
-    delete_messages = [RemoveMessage(id=m.id) for m in state["messages"][:-2]]
+    delete_messages = [RemoveMessage(id=m.id) for m in state["messages"][:-2]] #type: ignore
     return {"summary": response.content, "messages": delete_messages}
 
 

@@ -1,10 +1,11 @@
 from fastapi import FastAPI
 from .rout import router
+from .rag.router import router2
 import uvicorn
 app = FastAPI()
 
 app.include_router(router)
-
+app.include_router(router2)
 
 @app.get("/")
 async def root():

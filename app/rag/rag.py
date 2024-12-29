@@ -4,7 +4,6 @@ from langchain_google_genai import GoogleGenerativeAIEmbeddings
 from langchain_text_splitters import CharacterTextSplitter
 from langchain.tools.retriever import create_retriever_tool
 from dotenv import load_dotenv
-from langchain_core.tools import Tool
 import os
 
 load_dotenv()
@@ -18,7 +17,7 @@ embeddings = GoogleGenerativeAIEmbeddings(
     model="models/embedding-001",  # Required model name
 )
 
-db = FAISS.from_documents(texts, embeddings)
+db = FAISS.from_documents(texts, embeddings) 
 retriever = db.as_retriever()
 
 # Create your  reteriever tool
