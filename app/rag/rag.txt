@@ -1,0 +1,189 @@
+# Account Opening Interactive Flow
+
+# Step 1: Greeting
+User: I want to open a bank account.
+Assistant: "Hello! I am here to help you. I am your banking assistant. How can I assist you today?"
+
+# Step 2: Ask What Can Assist
+Assistant: "What would you like to do today? I can help you open a new bank account."
+
+# Step 3: Ask Age
+Assistant: "Great! To get started, please let me know your age."
+User: [User inputs age]
+
+# Step 4: Check Age
+IF age >= 18 THEN
+    Assistant: "Thank you! Please provide your CNIC number."
+    User: [User inputs CNIC]
+    
+    # Step 5: Check if CNIC already exists
+    IF CNIC exists in database THEN
+        Assistant: "It looks like you already have an account with us. Would you like to proceed with another service?"
+    ELSE
+        Assistant: "CNIC verified. Let's proceed with your account opening."
+        # Continue to next steps
+    ENDIF
+ELSE
+    Assistant: "I see you are under 18. We'll need your guardian's information to proceed."
+    Assistant: "Please provide your guardian's CNIC number."
+    User: [User inputs guardian's CNIC]
+    
+    # Step 6: Collect Guardian Information
+    Assistant: "Thank you! Please provide your guardian's contact number."
+    User: [User inputs guardian's contact number]
+    
+    Assistant: "Please let us know what your guardian does for a living."
+    User: [User inputs guardian's occupation]
+    
+    Assistant: "What is your guardian's source of income?"
+    User: [User inputs guardian's source of income]
+    
+    Assistant: "A guardian is required to ensure that minors have responsible oversight of their financial activities and to comply with banking regulations."
+    
+    Assistant: "Guardian information collected. Let's proceed with your account opening."
+ENDIF
+
+# Step 7: Ask Gender
+Assistant: "Please let me know your gender."
+User: [User inputs gender: Male/Female/Other]
+
+# Step 8: Ask Account Type
+Assistant: "What type of account would you like to open? You can choose between a Saving Account or a Current Account."
+User: [User selects account type]
+
+IF account_type == "Saving Account" THEN
+    # Step 9: Ask Source of Income
+    Assistant: "Great choice! Please let me know your source of income. Are you employed, or do you receive income from sales or other sources?"
+    User: [User inputs source of income]
+    
+    # Step 10: Explain Saving Account Benefits with Tax Details
+    Assistant: "Our Saving Account offers you monthly, quarterly, or annual profits based on a compound interest rate. The profits are subject to tax as per the government's rates, which differ for filers and non-filers. Please note that the bank applies taxes in accordance with these rates, ensuring that the tax on your earnings is not less than the government-mandated rates."
+    
+    # Step 11: Additional Services
+    Assistant: "Would you like to apply for an ATM Card? (Yes/No)"
+    User: [User inputs Yes/No]
+    
+    IF ATM_required == "Yes" THEN
+        Assistant: "Would you like to apply for a Cheque Book? (Yes/No)"
+        User: [User inputs Yes/No]
+        
+        IF cheque_book == "Yes" THEN
+            Assistant: "How many leaves would you like in your Cheque Book?"
+            User: [User inputs number of leaves]
+        ENDIF
+    ENDIF
+
+    # Step 12: Special Options for Female Customers
+    IF gender == "Female" THEN
+        Assistant: "As a valued female customer, we offer a Special Nisa Account which includes insurance services for various ailments. Would you like to learn more or apply for the Nisa Account? (Learn More/Apply/No)"
+        User: [User selects option]
+        
+        IF User selects "Learn More" THEN
+            Assistant: "Our Special Nisa Account provides comprehensive insurance coverage for health, accidents, and more. It ensures that you and your family are protected against unforeseen circumstances."
+            Assistant: "Would you like to apply for the Nisa Account now? (Yes/No)"
+            User: [User inputs Yes/No]
+            
+            IF User selects "Yes" THEN
+                Assistant: "Great! We will include the Nisa Account with your Saving Account. No additional action is required from your side."
+            ENDIF
+        ELSE IF User selects "Apply" THEN
+            Assistant: "Great! We will include the Nisa Account with your Saving Account. No additional action is required from your side."
+        ENDIF
+    ENDIF
+
+ELSE IF account_type == "Current Account" THEN
+    # Step 9: Ask Source of Income for Current Account
+    Assistant: "A Current Account is ideal for business and general transactions. To proceed, please provide your source of income."
+    Assistant: "Where are you employed or what is your primary source of income?"
+    User: [User inputs employment details or business income source]
+    
+    Assistant: "Please specify your current place of employment."
+    User: [User inputs place of employment]
+    
+    Assistant: "What is your monthly salary or business revenue?"
+    User: [User inputs salary amount or business revenue]
+    
+    # Step 10: Explain Current Account Benefits
+    Assistant: "Our Current Account is tailored for businesses and high-volume transactions. It offers unlimited transactions, overdraft facilities, and personalized banking services."
+    
+    # Step 11: Additional Services
+    Assistant: "Would you like to apply for an ATM Card? (Yes/No)"
+    User: [User inputs Yes/No]
+    
+    IF ATM_required == "Yes" THEN
+        Assistant: "Would you like to apply for a Cheque Book? (Yes/No)"
+        User: [User inputs Yes/No]
+        
+        IF cheque_book == "Yes" THEN
+            Assistant: "How many leaves would you like in your Cheque Book?"
+            User: [User inputs number of leaves]
+        ENDIF
+    ENDIF
+
+    # Step 12: Special Options for Female Customers
+    IF gender == "Female" THEN
+        Assistant: "As a valued female customer, we offer a Special Nisa Account which includes insurance services for various ailments. Would you like to learn more or apply for the Nisa Account? (Learn More/Apply/No)"
+        User: [User selects option]
+        
+        IF User selects "Learn More" THEN
+            Assistant: "Our Special Nisa Account provides comprehensive insurance coverage for health, accidents, and more. It ensures that you and your family are protected against unforeseen circumstances."
+            Assistant: "Would you like to apply for the Nisa Account now? (Yes/No)"
+            User: [User inputs Yes/No]
+            
+            IF User selects "Yes" THEN
+                Assistant: "Great! We will include the Nisa Account with your Current Account. No additional action is required from your side."
+            ENDIF
+        ELSE IF User selects "Apply" THEN
+            Assistant: "Great! We will include the Nisa Account with your Current Account. No additional action is required from your side."
+        ENDIF
+    ENDIF
+ENDIF
+
+# Step 13: Collect Documents
+Assistant: "Please upload a scanned copy of your CNIC and a recent photograph."
+User: [User uploads CNIC scan and photo]
+
+IF account_type == "Current Account" THEN
+    Assistant: "Please upload your company's account opening letter or relevant business documents."
+    User: [User uploads business documents]
+ENDIF
+
+# Step 14: Declaration and Terms
+Assistant: "Please read and sign the declaration form agreeing to our bank's terms and policies."
+User: [User signs declaration]
+
+# Step 15: Minimum Balance and Charges Information
+Assistant: "To activate your account, a minimum balance of 500 PKR is required. If you apply for an ATM Card or Cheque Book, the charges will be automatically deducted from your account. Additionally, for withdrawals exceeding 50,000 PKR in a single day, a fee of 0.6% will be applied unless you are a filer. Please confirm if you are a filer."
+User: [User confirms filer status]
+
+IF is_filer == "No" THEN
+    Assistant: "As a non-filer, a tax percentage will be applied to your transactions."
+ELSE
+    Assistant: "Thank you for confirming that you are a filer. No tax will be applied to your transactions."
+ENDIF
+
+# Step 16: Mobile Number Collection
+Assistant: "Please provide your mobile number for account-related notifications."
+User: [User inputs mobile number]
+
+# Step 17: Confirmation and Email Notification
+Assistant: "Thank you! Your account has been successfully created. You will receive a confirmation email shortly."
+User: [Process completes]
+
+# Step 18: Ask About Additional Bank Services
+Assistant: "Is there anything else I can help you with regarding our bank's services?"
+User: [User responds]
+
+IF User asks about deductions THEN
+    IF account_type == "Saving Account" THEN
+        Assistant: "For Saving Accounts, the tax on your monthly, quarterly, or annual profits will be applied as per the government's rates, which differ for filers and non-filers. These taxes are in accordance with government regulations and are not less than the bank's charges. Additionally, the bank will not deduct any funds from your account beyond these agreed charges."
+    ELSE IF account_type == "Current Account" THEN
+        Assistant: "For Current Accounts, bank charges may apply for services like ATM Card, Cheque Book, and overdraft facilities. The tax on your profits or transactions will be applied as per the government's rates, which differ for filers and non-filers. Rest assured, the bank will not cut into your funds beyond these specified charges."
+    ENDIF
+ELSE IF User needs further assistance THEN
+    # Provide relevant assistance based on user's request
+    Assistant: "[Provide relevant assistance based on user's response]"
+ELSE
+    # End Interaction
+    Assistant: "Thank you for choosing our bank. Have a great day!"
+ENDIF

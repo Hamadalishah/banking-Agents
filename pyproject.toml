@@ -1,0 +1,22 @@
+[tool.poetry]
+name = "summarizer-agent"
+version = "0.1.0"
+description = ""
+authors = ["Hamadalishah <hammadalis459@gmail.com>"]
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.12"
+fastapi = "^0.115.6"
+uvicorn = {extras = ["standard"], version = "^0.34.0"}
+langchain-google-genai = "^2.0.7"
+langchain-core = "^0.3.28"
+langgraph = "^0.2.60"
+python-dotenv = "^1.0.1"
+
+
+[tool.poetry.scripts]
+dev= "app.main:start"
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
